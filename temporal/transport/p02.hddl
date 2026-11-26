@@ -1,0 +1,49 @@
+(define (problem transport-2-problem)
+ (:domain transport-2-domain)
+ (:objects
+   truck0 - truck
+   place0 place1 place2 place3 - place
+   package0 package1 package2 - package
+ )
+ (:htn
+  :subtasks (and
+    (_t15 (deliver package0 place3))
+    (_t16 (deliver package1 place2))
+    (_t17 (deliver package2 place3)))
+  :ordering (and
+    ))
+ (:init
+              (road place1 place2)
+              (= (road-length place1 place2) 7)
+              (road place2 place1)
+              (= (road-length place2 place1) 7)
+              (road place2 place3)
+              (= (road-length place2 place3) 5)
+              (road place3 place2)
+              (= (road-length place3 place2) 5)
+              (road place3 place0)
+              (= (road-length place3 place0) 6)
+              (road place0 place3)
+              (= (road-length place0 place3) 6)
+              (truck-at truck0 place0)
+              (package-at package0 place1)
+              (package-at package1 place3)
+              (package-at package2 place2)
+              (= (road-length place0 place0) 1)
+              (= (road-length place1 place0) 1)
+              (= (road-length place2 place0) 1)
+              (= (road-length place0 place1) 1)
+              (= (road-length place1 place1) 1)
+              (= (road-length place3 place1) 1)
+              (= (road-length place0 place2) 1)
+              (= (road-length place2 place2) 1)
+              (= (road-length place1 place3) 1)
+              (= (road-length place3 place3) 1)
+ )
+ (:goal (and 
+           (package-at package0 place3)
+           (package-at package1 place2)
+           (package-at package2 place3)
+        )
+ )
+)

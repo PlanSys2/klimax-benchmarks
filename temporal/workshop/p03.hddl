@@ -1,0 +1,47 @@
+(define (problem workshop-3-problem)
+ (:domain workshop-3-domain)
+ (:objects
+   machine0 machine1 machine2 - machine
+   piece0 piece1 piece2 piece3 - piece
+ )
+ (:htn
+  :subtasks (and
+    (_t232 (make piece0))
+    (_t233 (make piece1))
+    (_t234 (make piece2))
+    (_t235 (make piece3)))
+  :ordering (and
+    ))
+ (:init
+              (first piece0 machine0)
+              (second piece0 machine2)
+              (= (time_ piece0 machine0) 6)
+              (= (time_ piece0 machine2) 8)
+              (first piece1 machine2)
+              (second piece1 machine0)
+              (= (time_ piece1 machine2) 1)
+              (= (time_ piece1 machine0) 8)
+              (first piece2 machine1)
+              (second piece2 machine0)
+              (= (time_ piece2 machine1) 4)
+              (= (time_ piece2 machine0) 8)
+              (first piece3 machine2)
+              (second piece3 machine1)
+              (= (time_ piece3 machine2) 7)
+              (= (time_ piece3 machine1) 3)
+              (free machine0)
+              (free machine1)
+              (free machine2)
+              (= (time_ piece3 machine0) 1)
+              (= (time_ piece0 machine1) 1)
+              (= (time_ piece1 machine1) 1)
+              (= (time_ piece2 machine2) 1)
+ )
+ (:goal (and 
+           (done piece0 machine2)
+           (done piece1 machine0)
+           (done piece2 machine0)
+           (done piece3 machine1)
+        )
+ )
+)

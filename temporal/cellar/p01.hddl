@@ -1,0 +1,21 @@
+(define (problem cellar-1-problem)
+ (:domain cellar-1-domain)
+ (:objects
+   match0 match1 - match
+   fuse0 - fuse
+ )
+ (:htn
+  :ordered-subtasks (and
+    (_t308 (fix fuse0))))
+ (:init
+              (= (burns match0) 7)
+              (= (burns match1) 6)
+              (unused match0)
+              (unused match1)
+              (handfree)
+ )
+ (:goal (and 
+           (mended fuse0)
+        )
+ )
+)

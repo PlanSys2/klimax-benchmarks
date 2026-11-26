@@ -1,0 +1,34 @@
+(define (domain workshop-1-domain)
+ (:requirements :strips :typing :durative-actions :hierarchy :method-preconditions)
+ (:types machine piece)
+ (:predicates 
+             (free ?m - machine)
+             (first ?p - piece ?m - machine)
+             (second ?p - piece ?m - machine)
+             (done ?p - piece ?m - machine)
+ )
+ (:functions 
+             (time_ ?p - piece ?m - machine)
+ )
+ (:task make
+  :parameters ( ?p - piece))
+ (:method m-make
+  :parameters ( ?p - piece ?a - machine ?b - machine)
+  :task (make ?p)
+  :precondition (and (first ?p ?a) (second ?p ?b))
+  :ordered-subtasks (and
+    (_t221 (process ?p ?a))
+    (_t222 (process ?p ?b))))
+ (:durative-action process
+  :parameters ( ?p - piece ?m - machine)
+  :duration (= ?duration (time_ ?p ?m))
+  :condition (and 
+                 (at start (free ?m))
+             )
+  :effect (and
+              (at start (not (free ?m)))
+              (at end (free ?m))
+              (at end (done ?p ?m))
+          )
+ )
+)

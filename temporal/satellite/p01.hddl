@@ -1,0 +1,33 @@
+(define (problem satellite-1-problem)
+ (:domain satellite-1-domain)
+ (:objects
+   site0 site1 site2 - site
+ )
+ (:htn
+  :subtasks (and
+    (_t129 (observe site1))
+    (_t130 (observe site2)))
+  :ordering (and
+    ))
+ (:init
+              (= (turn-time site0 site1) 9)
+              (= (turn-time site0 site2) 23)
+              (= (turn-time site1 site0) 30)
+              (= (turn-time site1 site2) 29)
+              (= (turn-time site2 site0) 7)
+              (= (turn-time site2 site1) 13)
+              (pointing site0)
+              (= (turn-time site0 site0) 10)
+              (= (turn-time site1 site1) 10)
+              (= (turn-time site2 site2) 10)
+              (at 8.0 (visible site1))
+              (at 188.0 (not (visible site1)))
+              (at 32.0 (visible site2))
+              (at 212.0 (not (visible site2)))
+ )
+ (:goal (and 
+           (taken site1)
+           (taken site2)
+        )
+ )
+)

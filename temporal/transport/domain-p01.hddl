@@ -1,0 +1,75 @@
+(define (domain transport-1-domain)
+ (:requirements :strips :typing :durative-actions :hierarchy :method-preconditions)
+ (:types truck place package)
+ (:predicates 
+             (truck-at ?t - truck ?l - place)
+             (package-at ?p - package ?l - place)
+             (in ?p - package ?t - truck)
+             (road ?a - place ?b - place)
+ )
+ (:functions 
+             (road-length ?a - place ?b - place)
+ )
+ (:task get-to
+  :parameters ( ?t - truck ?l - place))
+ (:task deliver
+  :parameters ( ?p - package ?l - place))
+ (:method m-there
+  :parameters ( ?t - truck ?l - place)
+  :task (get-to ?t ?l)
+  :precondition (and (truck-at ?t ?l)))
+ (:method m-drive
+  :parameters ( ?t - truck ?a - place ?b - place ?l - place)
+  :task (get-to ?t ?l)
+  :precondition (and (truck-at ?t ?a) (road ?a ?b))
+  :ordered-subtasks (and
+    (_t1 (drive ?t ?a ?b))
+    (_t2 (get-to ?t ?l))))
+ (:method m-deliver
+  :parameters ( ?p - package ?a - place ?b - place ?t - truck)
+  :task (deliver ?p ?b)
+  :precondition (and (package-at ?p ?a))
+  :ordered-subtasks (and
+    (_t3 (get-to ?t ?a))
+    (_t4 (load ?t ?p ?a))
+    (_t5 (get-to ?t ?b))
+    (_t6 (unload ?t ?p ?b))))
+ (:durative-action drive
+  :parameters ( ?t - truck ?a - place ?b - place)
+  :duration (= ?duration (road-length ?a ?b))
+  :condition (and 
+                 (at start (truck-at ?t ?a))
+                 (at start (road ?a ?b))
+             )
+  :effect (and
+              (at start (not (truck-at ?t ?a)))
+              (at end (truck-at ?t ?b))
+          )
+ )
+ (:durative-action load
+  :parameters ( ?t - truck ?p - package ?l - place)
+  :duration (= ?duration 1)
+  :condition (and 
+                 (at start (package-at ?p ?l))
+                 (at start (truck-at ?t ?l))
+                 (over all (truck-at ?t ?l))
+             )
+  :effect (and
+              (at start (not (package-at ?p ?l)))
+              (at end (in ?p ?t))
+          )
+ )
+ (:durative-action unload
+  :parameters ( ?t - truck ?p - package ?l - place)
+  :duration (= ?duration 1)
+  :condition (and 
+                 (at start (in ?p ?t))
+                 (at start (truck-at ?t ?l))
+                 (over all (truck-at ?t ?l))
+             )
+  :effect (and
+              (at start (not (in ?p ?t)))
+              (at end (package-at ?p ?l))
+          )
+ )
+)

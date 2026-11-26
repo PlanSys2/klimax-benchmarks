@@ -1,0 +1,50 @@
+(define (domain cellar-1-domain)
+ (:requirements :strips :typing :durative-actions :hierarchy :method-preconditions)
+ (:types match fuse)
+ (:predicates 
+             (unused ?m - match)
+             (light ?m - match)
+             (mended ?f - fuse)
+             (handfree)
+ )
+ (:functions 
+             (burns ?m - match)
+ )
+ (:task fix
+  :parameters ( ?f - fuse))
+ (:method m-fix
+  :parameters ( ?f - fuse ?m - match)
+  :task (fix ?f)
+  :precondition (and (unused ?m))
+  :subtasks (and
+    (_t306 (light-match ?m))
+    (_t307 (mend ?f ?m)))
+  :ordering (and
+    ))
+ (:durative-action light-match
+  :parameters ( ?m - match)
+  :duration (= ?duration (burns ?m))
+  :condition (and 
+                 (at start (unused ?m))
+             )
+  :effect (and
+              (at start (not (unused ?m)))
+              (at start (light ?m))
+              (at end (not (light ?m)))
+          )
+ )
+ (:durative-action mend
+  :parameters ( ?f - fuse ?m - match)
+  :duration (= ?duration 5)
+  :condition (and 
+                 (at start (handfree))
+                 (at start (light ?m))
+                 (over all (light ?m))
+             )
+  :effect (and
+              (at start (not (handfree)))
+              (at end (handfree))
+              (at end (mended ?f))
+          )
+ )
+)

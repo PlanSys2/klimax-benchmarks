@@ -1,0 +1,39 @@
+(define (problem cellar-5-problem)
+ (:domain cellar-5-domain)
+ (:objects
+   match0 match1 match2 match3 match4 match5 - match
+   fuse0 fuse1 fuse2 fuse3 fuse4 - fuse
+ )
+ (:htn
+  :subtasks (and
+    (_t326 (fix fuse0))
+    (_t327 (fix fuse1))
+    (_t328 (fix fuse2))
+    (_t329 (fix fuse3))
+    (_t330 (fix fuse4)))
+  :ordering (and
+    ))
+ (:init
+              (= (burns match0) 8)
+              (= (burns match1) 8)
+              (= (burns match2) 6)
+              (= (burns match3) 9)
+              (= (burns match4) 7)
+              (= (burns match5) 6)
+              (unused match0)
+              (unused match1)
+              (unused match2)
+              (unused match3)
+              (unused match4)
+              (unused match5)
+              (handfree)
+ )
+ (:goal (and 
+           (mended fuse0)
+           (mended fuse1)
+           (mended fuse2)
+           (mended fuse3)
+           (mended fuse4)
+        )
+ )
+)

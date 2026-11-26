@@ -1,0 +1,51 @@
+(define (domain satellite-1-domain)
+ (:requirements :strips :typing :negative-preconditions :durative-actions :timed-initial-literals :hierarchy :method-preconditions)
+ (:types site)
+ (:predicates 
+             (pointing ?s - site)
+             (visible ?s - site)
+             (taken ?s - site)
+ )
+ (:functions 
+             (turn-time ?a - site ?b - site)
+ )
+ (:task observe
+  :parameters ( ?s - site))
+ (:method m-here
+  :parameters ( ?s - site)
+  :task (observe ?s)
+  :precondition (and (pointing ?s))
+  :ordered-subtasks (and
+    (_t126 (take-image ?s))))
+ (:method m-turn
+  :parameters ( ?s - site ?a - site)
+  :task (observe ?s)
+  :precondition (and (pointing ?a) (not (pointing ?s)))
+  :ordered-subtasks (and
+    (_t127 (turn ?a ?s))
+    (_t128 (take-image ?s))))
+ (:durative-action turn
+  :parameters ( ?a - site ?b - site)
+  :duration (= ?duration (turn-time ?a ?b))
+  :condition (and 
+                 (at start (pointing ?a))
+             )
+  :effect (and
+              (at start (not (pointing ?a)))
+              (at end (pointing ?b))
+          )
+ )
+ (:durative-action take-image
+  :parameters ( ?s - site)
+  :duration (= ?duration 2)
+  :condition (and 
+                 (at start (pointing ?s))
+                 (at start (visible ?s))
+                 (over all (pointing ?s))
+                 (over all (visible ?s))
+             )
+  :effect (and
+              (at end (taken ?s))
+          )
+ )
+)

@@ -1,0 +1,30 @@
+(define (problem workshop-1-problem)
+ (:domain workshop-1-domain)
+ (:objects
+   machine0 machine1 - machine
+   piece0 piece1 - piece
+ )
+ (:htn
+  :subtasks (and
+    (_t223 (make piece0))
+    (_t224 (make piece1)))
+  :ordering (and
+    ))
+ (:init
+              (first piece0 machine0)
+              (second piece0 machine1)
+              (= (time_ piece0 machine0) 5)
+              (= (time_ piece0 machine1) 2)
+              (first piece1 machine1)
+              (second piece1 machine0)
+              (= (time_ piece1 machine1) 8)
+              (= (time_ piece1 machine0) 7)
+              (free machine0)
+              (free machine1)
+ )
+ (:goal (and 
+           (done piece0 machine1)
+           (done piece1 machine0)
+        )
+ )
+)

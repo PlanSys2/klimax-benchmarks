@@ -1,0 +1,5 @@
+(define (problem lamps-2) (:domain lamps)
+ (:objects lamp0 lamp1 lamp2 lamp3 lamp4 - lamp switch0 switch1 switch2 switch3 switch4 - switch)
+ (:htn :subtasks (and (light lamp2) (light lamp0) (light lamp3) (light lamp4) (light lamp1)))
+ (:init (lights switch0 lamp0) (cuts switch0 lamp4) (lights switch1 lamp1) (lights switch2 lamp2) (cuts switch2 lamp4) (lights switch3 lamp3) (lights switch4 lamp4))
+ (:goal (and (lit lamp0) (lit lamp1) (lit lamp2) (lit lamp3) (lit lamp4))))

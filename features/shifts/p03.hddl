@@ -1,0 +1,6 @@
+(define (problem shifts-3) (:domain shifts)
+ (:objects worker0 worker1 worker2 worker3 worker4 worker5 worker6 worker7 worker8 - worker)
+ (:htn :subtasks (and (shift worker0 worker1 worker2) (shift worker3 worker4 worker5) (shift worker6 worker7 worker8)))
+ (:init (= (limit) 8) (idle worker0) (idle worker1) (idle worker2) (idle worker3) (idle worker4) (idle worker5) (idle worker6) (idle worker7) (idle worker8)
+  (= (job-time worker0) 3) (= (job-time worker1) 6) (= (job-time worker2) 4) (= (job-time worker3) 2) (= (job-time worker4) 8) (= (job-time worker5) 3) (= (job-time worker6) 4) (= (job-time worker7) 8) (= (job-time worker8) 7))
+ (:goal (and (done worker0) (done worker1) (done worker2) (done worker3) (done worker4) (done worker5) (done worker6) (done worker7) (done worker8))))

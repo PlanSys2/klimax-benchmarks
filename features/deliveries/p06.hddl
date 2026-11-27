@@ -1,0 +1,8 @@
+(define (problem deliveries-3) (:domain deliveries)
+ (:objects place0 place1 place2 place3 place4 place5 island - place robot0 robot1 - robot package0 package1 package2 package3 - package)
+ (:htn :subtasks (and (deliver package0 island) (deliver package1 place1) (deliver package2 place4) (deliver package3 place5)))
+ (:init
+  (road place0 place1) (road place0 place4) (road place0 place5) (road place1 place0) (road place1 place2) (road place1 place4) (road place2 place1) (road place2 place3) (road place2 place4) (road place3 place2) (road place3 place4) (road place4 place0) (road place4 place1) (road place4 place2) (road place4 place3) (road place4 place5) (road place5 place0) (road place5 place4)
+  (= (loc robot0) place4) (= (loc robot1) place3)
+  (= (where package0) place0) (= (where package1) place3) (= (where package2) place2) (= (where package3) place4))
+ (:goal (and (= (where package0) island) (= (where package1) place1) (= (where package2) place4) (= (where package3) place5))))

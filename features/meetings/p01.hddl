@@ -1,0 +1,6 @@
+(define (problem meetings-1) (:domain meetings)
+ (:objects worker0 worker1 worker2 - worker)
+ (:htn :subtasks (and (work worker0) (meet worker1 worker2) (work worker1) (work worker2)))
+ (:init (free worker0) (free worker1) (free worker2)
+  (= (talk-time worker0) 6) (= (work-time worker0) 5) (= (talk-time worker1) 2) (= (work-time worker1) 4) (= (talk-time worker2) 6) (= (work-time worker2) 4))
+ (:goal (and (met worker1 worker2) (done worker0) (done worker1) (done worker2))))

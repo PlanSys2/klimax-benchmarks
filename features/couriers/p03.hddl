@@ -1,0 +1,8 @@
+(define (problem couriers-3) (:domain couriers)
+ (:objects place0 place1 place2 place3 place4 place5 - place courier0 courier1 - courier parcel0 parcel1 parcel2 parcel3 - parcel)
+ (:htn :subtasks (and (bring parcel0 place2) (bring parcel1 place5) (bring parcel2 place2) (bring parcel3 place1)))
+ (:init (= (total-cost) 0)
+  (road place0 place1) (= (road-cost place0 place1) 3) (road place0 place3) (= (road-cost place0 place3) 4) (road place0 place4) (= (road-cost place0 place4) 1) (road place0 place5) (= (road-cost place0 place5) 1) (road place1 place0) (= (road-cost place1 place0) 3) (road place1 place2) (= (road-cost place1 place2) 2) (road place1 place5) (= (road-cost place1 place5) 3) (road place2 place1) (= (road-cost place2 place1) 2) (road place2 place3) (= (road-cost place2 place3) 5) (road place3 place0) (= (road-cost place3 place0) 4) (road place3 place2) (= (road-cost place3 place2) 5) (road place3 place4) (= (road-cost place3 place4) 7) (road place3 place5) (= (road-cost place3 place5) 4) (road place4 place0) (= (road-cost place4 place0) 1) (road place4 place3) (= (road-cost place4 place3) 7) (road place4 place5) (= (road-cost place4 place5) 6) (road place5 place0) (= (road-cost place5 place0) 1) (road place5 place1) (= (road-cost place5 place1) 3) (road place5 place3) (= (road-cost place5 place3) 4) (road place5 place4) (= (road-cost place5 place4) 6)
+  (at courier0 place5) (at courier1 place4)
+  (parcel-at parcel0 place5) (parcel-at parcel1 place3) (parcel-at parcel2 place5) (parcel-at parcel3 place2))
+ (:metric minimize (total-cost)))

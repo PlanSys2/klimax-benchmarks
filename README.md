@@ -9,8 +9,8 @@ They are made to measure [Klimax](https://github.com/PlanSys2/klimax) against ot
 and are not written for it: every problem is built with Unified Planning, so that every engine
 that takes temporal hierarchical problems gets the same one, and is also given as HDDL files.
 
-> **Status**: a first set, with time. The other levels (numbers, constraints on the states of
-> the plan) and more families are to come.
+> **Status**: a first set, with time, and a family for each feature of HDDL 2.1 that no public
+> benchmark has.
 
 ## Families
 
@@ -25,10 +25,30 @@ a plan may run actions at once.
 | `workshop` | Pieces go through two machines in order; a machine does one piece at a time | a shared resource; actions of different tasks at once |
 | `cellar` | Fuses are mended by the light of matches that burn for a while | actions that must overlap: no plan with one action after another |
 
+## Families by feature
+
+Thirty-six problems in `features/`: six families of six, each for a feature of HDDL 2.1 that
+neither the IPC benchmarks nor the numeric one of Quenard et al. have (as `klimax --check`
+finds them). In each family `p01` to `p05` have a plan, of growing size, and `p06` has none
+(`features/expected.tsv`), to catch a planner that claims "unsolvable" falsely or gives a plan
+for an impossible task. They are written as HDDL by `generators/features.py`: Unified Planning
+does not express orderings between time points, durative methods or constraints on states.
+
+| Family | Feature | What it is | Without a plan (`p06`) |
+|---|---|---|---|
+| `deliveries` | object fluents | Robots deliver packages; where each is, is an object | a place no road reaches |
+| `couriers` | action costs, a metric to minimize | Couriers bring parcels over roads that cost | a depot no road goes into |
+| `lamps` | conditional effects | A switch lights a lamp and turns some others off | two lamps whose switches turn each other off |
+| `meetings` | orderings between time points | The two talks of a meeting start at once | a worker who meets itself |
+| `shifts` | durative methods, their durations | A shift of three jobs may last up to a limit | a worker twice in a shift |
+| `rooms` | constraints on states | A room is lit just before someone walks in; lights are dimmed to save power | a light dimmed before the visit |
+
 [FEATURES.md](FEATURES.md) says which features of HDDL 2.1 each family uses.
 
 ## Layout
 
+- `generators/features.py`: the families by feature, written as HDDL
+  (`features/<family>/domain.hddl`, `pNN.hddl` and `features/expected.tsv`).
 - `generators/temporal.py`: the generators. `transport(size, seed)` and the others return a
   `HierarchicalProblem` of Unified Planning; run as a script it writes every problem as HDDL.
 - `temporal/<family>/domain-pNN.hddl` and `pNN.hddl`: the problems, as Unified Planning writes

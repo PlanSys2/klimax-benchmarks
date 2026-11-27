@@ -1,0 +1,6 @@
+(define (problem shifts-1) (:domain shifts)
+ (:objects worker0 worker1 worker2 - worker)
+ (:htn :subtasks (and (shift worker0 worker1 worker2)))
+ (:init (= (limit) 5) (idle worker0) (idle worker1) (idle worker2)
+  (= (job-time worker0) 5) (= (job-time worker1) 2) (= (job-time worker2) 5))
+ (:goal (and (done worker0) (done worker1) (done worker2))))

@@ -1,0 +1,5 @@
+(define (problem rooms-1) (:domain rooms)
+ (:objects room0 room1 - room)
+ (:htn :subtasks (and (t3 (visit room1)) (t1 (prepare room0)) (t0 (visit room0)) (t4 (prepare room1)) (t2 (save room0)) (t5 (save room1))))
+ (:init)
+ (:goal (and (seen room0) (seen room1))))

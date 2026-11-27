@@ -100,6 +100,30 @@ At 30 s per problem, one core and 8 GB (`results/2026-11-26-temporal.csv`; Klima
   [Kairos](https://github.com/PlanSys2/kairos)' validator and shares no code with Klimax's
   searches. A second, independent one is welcome.
 
+### By feature
+
+The families by feature, at 30 s per problem, one core and 8 GB, with the planners that read HDDL
+(the harness of Klimax's comparison with the planners of IPC 2023, on the HDDL files; Klimax at
+its version of 2026-11-27, `results/2026-11-27-features.csv`). The plans are verified by Klimax's
+verifier: the IPC one reads only HDDL 1.0. Counted: the five problems with a plan of each family.
+
+| Family | Klimax | Aries | PANDA | PANDA ppro | PANDA lamda | Linear-Simple | Linear-Complex | SIADEX |
+|---|---|---|---|---|---|---|---|---|
+| `couriers` | **5** | 0 | 3 | **5** | **5** | **5** | **5** | 0 |
+| `deliveries` | **5** | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `lamps` | **5** | 0 | 3 | 3 | 3 | 3 | 3 | 1 |
+| `meetings` | **5** | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `rooms` | **5** | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `shifts` | **5** | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| **Total** | 30 of 30 | 0 | 6 | 8 | 8 | 8 | 8 | 1 |
+
+- No planner gives a plan for the problems without one (`p06`).
+- Aries' executable reads none of these families, and through Unified Planning they cannot be
+  expressed (orderings between time points, durative methods and constraints on states are not
+  in it).
+- Planners that ignore the metric still solve `couriers`: their plans are valid, not the
+  cheapest. In `lamps`, the others solve the three smallest.
+
 ## License
 
 Apache-2.0.
